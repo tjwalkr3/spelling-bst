@@ -73,7 +73,19 @@ public class Accumulator<T> : IVisitor<T> {
     }
 }
 
-public class BinaryTreeNode<T> {
+public class BInaryTree<T> where T: IComparable<T> {
+    BinaryTreeNode<T>? root = null;
+
+    private ref BinaryTreeNode<T>? FindNode(T value) {
+        if (root == null || root.GetValue().CompareTo(value) == 0) {
+            return ref root;
+        } else if (value.CompareTo(root.GetValue()) < 0) {
+            
+        }
+    }
+}
+
+public class BinaryTreeNode<T> where T: IComparable<T> {
     private T value;
     public BinaryTreeNode<T>? left {get; set;}
     public BinaryTreeNode<T>? right {get; set;}
@@ -82,6 +94,11 @@ public class BinaryTreeNode<T> {
         this.value = value;
         this.left = left;
         this.right = right;
+    }
+
+
+    public T GetValue() {
+        return value;
     }
 
     public void TraverseInOrder(IVisitor<T> visitor) {
