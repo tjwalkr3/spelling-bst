@@ -1,6 +1,4 @@
 namespace spelling_bst;
-
-
 public class Tests
 {
     // Represents the expression 5 * 10 + 8 * 4 - 9
@@ -55,6 +53,93 @@ public class Tests
         Assert.That(tree.left?.left?.Height2(), Is.EqualTo(2));
         Assert.That(tree.left?.left?.left?.Height2(), Is.EqualTo(1));
     }
+
+    //add tests
+    
+    [Test]
+    public void TestAddOverwrite()
+    {
+        BinaryTreeNode<int> root = new BinaryTreeNode<int>(5);
+        BinaryTreeNode<int> node = new BinaryTreeNode<int>(5);
+
+        root.Add(node, 5);
+
+        Assert.That(root.GetValue(), Is.EqualTo(5));
+    }
+
+    [Test]
+    public void TestAddToLeft()
+    {
+        BinaryTreeNode<int> root = new BinaryTreeNode<int>(5);
+        BinaryTreeNode<int> node = new BinaryTreeNode<int>(3);
+
+        root.Add(node, 3);
+
+        Assert.That(root.left, Is.EqualTo(node));
+    }
+
+    [Test]
+    public void TestAddToRight()
+    {
+        BinaryTreeNode<int> root = new BinaryTreeNode<int>(5);
+        BinaryTreeNode<int> node = new BinaryTreeNode<int>(8);
+
+        root.Add(node, 8);
+
+        Assert.That(root.right, Is.EqualTo(node));
+    }
+
+    //Remove tests
+    [Test]
+    public void TestAddNode()
+    {
+        BinaryTreeNode<int> root = new BinaryTreeNode<int>(10);
+        BinaryTreeNode<int> node = new BinaryTreeNode<int>(5);
+
+        root.Add(node, 5);
+
+        Assert.That(root.left, Is.EqualTo(node));
+    }
+
+    [Test]
+    public void TestRemoveLeafNode()
+    {
+        BinaryTreeNode<int> root = new BinaryTreeNode<int>(10);
+        BinaryTreeNode<int> node = new BinaryTreeNode<int>(5);
+
+        root.Add(node, 5);
+        root.Remove(root, 5);
+
+        Assert.That(root.left, Is.Null);
+    }
+
+    [Test]
+    public void TestRemoveNodeWithOneChild()
+    {
+        BinaryTreeNode<int> root = new BinaryTreeNode<int>(10);
+        BinaryTreeNode<int> leftNode = new BinaryTreeNode<int>(5);
+
+        root.Add(leftNode, 5);
+        root.Remove(root, 5);
+
+        Assert.That(root.left, Is.Null);
+    }
+
+    [Test]
+    public void TestRemoveNodeWithTwoChildren()
+    {
+        BinaryTreeNode<int> root = new BinaryTreeNode<int>(10);
+        BinaryTreeNode<int> leftNode = new BinaryTreeNode<int>(5);
+        BinaryTreeNode<int> rightNode = new BinaryTreeNode<int>(15);
+
+        root.Add(leftNode, 5);
+        root.Add(rightNode, 15);
+        root.Remove(root, 10);
+
+        Assert.That(root.GetValue(), Is.EqualTo(15));
+        Assert.That(root.left, Is.EqualTo(leftNode));
+        Assert.That(root.right, Is.Null);
+    }
 }
 
 public interface IVisitor<T> {
@@ -76,13 +161,13 @@ public class Accumulator<T> : IVisitor<T> {
 public class BInaryTree<T> where T: IComparable<T> {
     BinaryTreeNode<T>? root = null;
 
-    private ref BinaryTreeNode<T>? FindNode(T value) {
-        if (root == null || root.GetValue().CompareTo(value) == 0) {
-            return ref root;
-        } else if (value.CompareTo(root.GetValue()) < 0) {
+//     private ref BinaryTreeNode<T>? FindNode(T value) {
+//         if (root == null || root.GetValue().CompareTo(value) == 0) {
+//             return ref root;
+//         } else if (value.CompareTo(root.GetValue()) < 0) {
             
-        }
-    }
+//         }
+//     }
 }
 
 public class BinaryTreeNode<T> where T: IComparable<T> {
@@ -99,6 +184,91 @@ public class BinaryTreeNode<T> where T: IComparable<T> {
 
     public T GetValue() {
         return value;
+    }
+
+    public void Add(BinaryTreeNode<T> newNode, T key)
+    {
+        // If the current node has the same key as the new node, update its value.
+        if (key.Equals(this.GetValue()))
+        {
+            this.value = newNode.value;
+        }
+        // If the key of the new node is less than the current node's key, go left.
+        else if (key.CompareTo(this.GetValue()) < 0)
+        {
+            if (left == null)
+            {
+                left = newNode;
+            }
+            else
+            {
+                left.Add(newNode, key);
+            }
+        }
+        // If the key of the new node is greater than the current node's key, go right.
+        else if (key.CompareTo(this.GetValue()) > 0)
+        {
+            if (right == null)
+            {
+                right = newNode;
+            }
+            else
+            {
+                right.Add(newNode, key);
+            }
+        }
+    }
+
+
+    public BinaryTreeNode<T> Remove(BinaryTreeNode<T> node, T key)
+    {
+        if (node == null)
+        {
+            return node; // Key not found, no action needed.
+        }
+
+        // Recursively search for the key to be removed.
+        int comparison = key.CompareTo(node.GetValue());
+        if (comparison < 0)
+        {
+            node.left = Remove(node.left, key);
+        }
+        else if (comparison > 0)
+        {
+            node.right = Remove(node.right, key);
+        }
+        else
+        {
+            // Key found, consider the different cases.
+            if (node.left == null)
+            {
+                return node.right; // Case 1: Node with one child or no child.
+            }
+            else if (node.right == null)
+            {
+                return node.left; // Case 1: Node with one child.
+            }
+
+            // Case 2: Node with two children.
+            // Find the in-order successor (smallest in the right subtree).
+            node.value = MinValue(node.right);
+
+            // Remove the in-order successor.
+            node.right = Remove(node.right, node.GetValue());
+        }
+
+        return node;
+    }
+
+    private T MinValue(BinaryTreeNode<T> node)
+    {
+        T minValue = node.GetValue();
+        while (node.left != null)
+        {
+            minValue = node.left.GetValue();
+            node = node.left;
+        }
+        return minValue;
     }
 
     public void TraverseInOrder(IVisitor<T> visitor) {
