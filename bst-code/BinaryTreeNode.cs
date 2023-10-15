@@ -2,6 +2,7 @@ namespace bst_code;
 
 public class BinaryTreeNode<T> where T: IComparable<T> {
     private T value;
+    public int height;
     public BinaryTreeNode<T>? left {get; set;}
     public BinaryTreeNode<T>? right {get; set;}
 
@@ -11,94 +12,14 @@ public class BinaryTreeNode<T> where T: IComparable<T> {
         this.right = right;
     }
 
-
     public T GetValue() {
         return value;
     }
 
-    public void Add(BinaryTreeNode<T> newNode, T key)
-    {
-        // If the current node has the same key as the new node, update its value.
-        if (key.Equals(this.GetValue()))
-        {
-            this.value = newNode.value;
-        }
-        // If the key of the new node is less than the current node's key, go left.
-        else if (key.CompareTo(this.GetValue()) < 0)
-        {
-            if (left == null)
-            {
-                left = newNode;
-            }
-            else
-            {
-                left.Add(newNode, key);
-            }
-        }
-        // If the key of the new node is greater than the current node's key, go right.
-        else if (key.CompareTo(this.GetValue()) > 0)
-        {
-            if (right == null)
-            {
-                right = newNode;
-            }
-            else
-            {
-                right.Add(newNode, key);
-            }
-        }
-    }
-
-
-    public BinaryTreeNode<T> Remove(BinaryTreeNode<T> node, T key)
-    {
-        if (node == null)
-        {
-            return node; // Key not found, no action needed.
-        }
-
-        // Recursively search for the key to be removed.
-        int comparison = key.CompareTo(node.GetValue());
-        if (comparison < 0)
-        {
-            node.left = Remove(node.left, key);
-        }
-        else if (comparison > 0)
-        {
-            node.right = Remove(node.right, key);
-        }
-        else
-        {
-            // Key found, consider the different cases.
-            if (node.left == null)
-            {
-                return node.right; // Case 1: Node with one child or no child.
-            }
-            else if (node.right == null)
-            {
-                return node.left; // Case 1: Node with one child.
-            }
-
-            // Case 2: Node with two children.
-            // Find the in-order successor (smallest in the right subtree).
-            node.value = MinValue(node.right);
-
-            // Remove the in-order successor.
-            node.right = Remove(node.right, node.GetValue());
-        }
-
-        return node;
-    }
-
-    private T MinValue(BinaryTreeNode<T> node)
-    {
-        T minValue = node.GetValue();
-        while (node.left != null)
-        {
-            minValue = node.left.GetValue();
-            node = node.left;
-        }
-        return minValue;
+    public T SetValue(T newValue) {
+        T temp = value;
+        value = newValue;
+        return temp;
     }
 
     public void TraverseInOrder(IVisitor<T> visitor) {
@@ -131,7 +52,7 @@ public class BinaryTreeNode<T> where T: IComparable<T> {
         }
     }
 
-    public int Size2() {
+    public int Size() {
         Queue<BinaryTreeNode<T>> countQueue = new Queue<BinaryTreeNode<T>>();
         countQueue.Enqueue(this);
         int count = 1;
@@ -155,7 +76,7 @@ public class BinaryTreeNode<T> where T: IComparable<T> {
         return count;
     }
 
-    public int Height2() {
+    public int Height() {
         Queue<BinaryTreeNode<T>> heightQueue = new Queue<BinaryTreeNode<T>>();
         heightQueue.Enqueue(this);
         int numOfNodes = heightQueue.Count;
