@@ -41,4 +41,21 @@ public class BinaryTreeTests {
         Assert.That(inOrderAccumulated, Is.EqualTo(new List<int>(){1, 3, 4, 5}));
     }
 
+    [Test]
+    public void TestBalancing()
+    {
+        BinaryTree<int> tree = new BinaryTree<int>();
+        tree.Add(1);
+        tree.Add(2);
+        tree.Add(3);
+        tree.Add(4);
+        tree.Add(5);
+        tree.Add(7);
+        tree.Add(6);
+
+        List<int> inOrderAccumulated = tree.TraverseInOrder();
+        Console.WriteLine($"Balancing Test: {string.Join(',', inOrderAccumulated.ToArray())}");
+        Assert.That(inOrderAccumulated, Is.EqualTo(new List<int>(){1, 2, 3, 4, 5, 6, 7}));
+    }
+
 }
