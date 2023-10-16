@@ -391,6 +391,19 @@
         "runtime": {
           "bin/placeholder/bst-code.dll": {}
         }
+      },
+      "sortedset/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "bst-code": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/sortedset.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/sortedset.dll": {}
+        }
       }
     }
   },
@@ -991,6 +1004,11 @@
       "type": "project",
       "path": "../bst-code/bst-code.csproj",
       "msbuildProject": "../bst-code/bst-code.csproj"
+    },
+    "sortedset/1.0.0": {
+      "type": "project",
+      "path": "../sortedset/sortedset.csproj",
+      "msbuildProject": "../sortedset/sortedset.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -1000,36 +1018,48 @@
       "NUnit.Analyzers >= 3.6.1",
       "NUnit3TestAdapter >= 4.4.2",
       "bst-code >= 1.0.0",
-      "coverlet.collector >= 3.2.0"
+      "coverlet.collector >= 3.2.0",
+      "sortedset >= 1.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\cloud\\.nuget\\packages\\": {}
+    "C:\\Users\\thomas.jones1\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\cloud\\Desktop\\spelling-bst\\tests\\tests.csproj",
+      "projectUniqueName": "C:\\Users\\thomas.jones1\\Desktop\\spelling-bst\\tests\\tests.csproj",
       "projectName": "tests",
-      "projectPath": "C:\\Users\\cloud\\Desktop\\spelling-bst\\tests\\tests.csproj",
-      "packagesPath": "C:\\Users\\cloud\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\cloud\\Desktop\\spelling-bst\\tests\\obj\\",
+      "projectPath": "C:\\Users\\thomas.jones1\\Desktop\\spelling-bst\\tests\\tests.csproj",
+      "packagesPath": "C:\\Users\\thomas.jones1\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\thomas.jones1\\Desktop\\spelling-bst\\tests\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\cloud\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\thomas.jones1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\cloud\\Desktop\\spelling-bst\\bst-code\\bst-code.csproj": {
-              "projectPath": "C:\\Users\\cloud\\Desktop\\spelling-bst\\bst-code\\bst-code.csproj"
+            "C:\\Users\\thomas.jones1\\Desktop\\spelling-bst\\bst-code\\bst-code.csproj": {
+              "projectPath": "C:\\Users\\thomas.jones1\\Desktop\\spelling-bst\\bst-code\\bst-code.csproj"
+            },
+            "C:\\Users\\thomas.jones1\\Desktop\\spelling-bst\\sortedset\\sortedset.csproj": {
+              "projectPath": "C:\\Users\\thomas.jones1\\Desktop\\spelling-bst\\sortedset\\sortedset.csproj"
             }
           }
         }

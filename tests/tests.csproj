@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\bst-code\bst-code.csproj" />
+    <ProjectReference Include="..\sortedset\sortedset.csproj" />
   </ItemGroup>
 
 </Project>

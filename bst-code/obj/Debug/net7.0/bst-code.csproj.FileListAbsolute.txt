@@ -9,3 +9,14 @@ C:\Users\cloud\Desktop\spelling-bst\bst-code\obj\Debug\net7.0\bst-code.dll
 C:\Users\cloud\Desktop\spelling-bst\bst-code\obj\Debug\net7.0\refint\bst-code.dll
 C:\Users\cloud\Desktop\spelling-bst\bst-code\obj\Debug\net7.0\bst-code.pdb
 C:\Users\cloud\Desktop\spelling-bst\bst-code\obj\Debug\net7.0\ref\bst-code.dll
+C:\Users\thomas.jones1\Desktop\spelling-bst\bst-code\bin\Debug\net7.0\bst-code.deps.json
+C:\Users\thomas.jones1\Desktop\spelling-bst\bst-code\bin\Debug\net7.0\bst-code.dll
+C:\Users\thomas.jones1\Desktop\spelling-bst\bst-code\bin\Debug\net7.0\bst-code.pdb
+C:\Users\thomas.jones1\Desktop\spelling-bst\bst-code\obj\Debug\net7.0\bst-code.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\thomas.jones1\Desktop\spelling-bst\bst-code\obj\Debug\net7.0\bst-code.AssemblyInfoInputs.cache
+C:\Users\thomas.jones1\Desktop\spelling-bst\bst-code\obj\Debug\net7.0\bst-code.AssemblyInfo.cs
+C:\Users\thomas.jones1\Desktop\spelling-bst\bst-code\obj\Debug\net7.0\bst-code.csproj.CoreCompileInputs.cache
+C:\Users\thomas.jones1\Desktop\spelling-bst\bst-code\obj\Debug\net7.0\bst-code.dll
+C:\Users\thomas.jones1\Desktop\spelling-bst\bst-code\obj\Debug\net7.0\refint\bst-code.dll
+C:\Users\thomas.jones1\Desktop\spelling-bst\bst-code\obj\Debug\net7.0\bst-code.pdb
+C:\Users\thomas.jones1\Desktop\spelling-bst\bst-code\obj\Debug\net7.0\ref\bst-code.dll
