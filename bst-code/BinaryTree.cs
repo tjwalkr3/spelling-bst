@@ -3,6 +3,37 @@
 public class BinaryTree<T> where T: IComparable<T> {
     BinaryTreeNode<T>? root = null;
 
+    public bool Find(T data) {
+        if (FindRecursive(root, data)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private bool FindRecursive(BinaryTreeNode<T>? currentNode, T key)
+    {
+        // Key not found, return false.
+        if (currentNode == null) {
+            return false;
+        }
+
+        // If the key is less than the current node's key, go left. 
+        else if (key.CompareTo(currentNode.GetValue()) < 0) {
+            return FindRecursive(currentNode.left, key);
+        }
+
+        // If the key is less than the current node's key, go right. 
+        else if (key.CompareTo(currentNode.GetValue()) > 0) {
+            return FindRecursive(currentNode.right, key);
+        }
+        
+        // You found the node
+        else {
+            return true;
+        }
+    }
+
     public void Add(T data) {
         BinaryTreeNode<T> newItem = new BinaryTreeNode<T>(data);
         if (root == null) {
@@ -10,10 +41,6 @@ public class BinaryTree<T> where T: IComparable<T> {
         } else {
             root = AddRecursive(root, newItem);
         }
-    }
-
-    public void Remove(T key) {
-        root = RemoveRecursive(root, key);
     }
 
     private BinaryTreeNode<T> AddRecursive(BinaryTreeNode<T>? currentNode, BinaryTreeNode<T> newNode)
@@ -39,6 +66,9 @@ public class BinaryTree<T> where T: IComparable<T> {
         return currentNode;
     }
 
+    public void Remove(T key) {
+        root = RemoveRecursive(root, key);
+    }
 
     private BinaryTreeNode<T>? RemoveRecursive(BinaryTreeNode<T>? currentNode, T key)
     {
@@ -182,5 +212,13 @@ public class BinaryTree<T> where T: IComparable<T> {
         if (root != null) root.TraversePreOrder(visitor);
 
         return accumulated;
+    }
+
+    public int Size() {
+        if (root != null) {
+            return root.Size();
+        } else {
+            return 0;
+        }
     }
 }

@@ -16,7 +16,7 @@ public class BinaryTreeTests {
         tree.Add(7);
 
         List<int> inOrderAccumulated = tree.TraverseInOrder();
-        Console.WriteLine($"Adding Test: {string.Join(',', inOrderAccumulated.ToArray())}");
+        //Console.WriteLine($"Adding Test: {string.Join(',', inOrderAccumulated.ToArray())}");
         Assert.That(inOrderAccumulated, Is.EqualTo(new List<int>(){1, 2, 3, 4, 5, 6, 7}));
     }
 
@@ -37,7 +37,7 @@ public class BinaryTreeTests {
         tree.Remove(2); // two children
 
         List<int> inOrderAccumulated = tree.TraverseInOrder();
-        Console.WriteLine($"Removing Test: {string.Join(',', inOrderAccumulated.ToArray())}");
+        //Console.WriteLine($"Removing Test: {string.Join(',', inOrderAccumulated.ToArray())}");
         Assert.That(inOrderAccumulated, Is.EqualTo(new List<int>(){1, 3, 4, 5}));
     }
 
@@ -54,8 +54,23 @@ public class BinaryTreeTests {
         tree.Add(6);
 
         List<int> inOrderAccumulated = tree.TraverseInOrder();
-        Console.WriteLine($"Balancing Test: {string.Join(',', inOrderAccumulated.ToArray())}");
+        //Console.WriteLine($"Balancing Test: {string.Join(',', inOrderAccumulated.ToArray())}");
         Assert.That(inOrderAccumulated, Is.EqualTo(new List<int>(){1, 2, 3, 4, 5, 6, 7}));
     }
 
+    [Test]
+    public void TestFind()
+    {
+        BinaryTree<int> tree = new BinaryTree<int>();
+        tree.Add(1);
+        tree.Add(2);
+        tree.Add(3);
+        tree.Add(4);
+
+        Assert.That(tree.Find(1), Is.EqualTo(true));
+        Assert.That(tree.Find(2), Is.EqualTo(true));
+        Assert.That(tree.Find(3), Is.EqualTo(true));
+        Assert.That(tree.Find(4), Is.EqualTo(true));
+        Assert.That(tree.Find(5), Is.EqualTo(false));
+    }
 }

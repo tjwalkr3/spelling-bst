@@ -204,3 +204,5 @@ C:\Users\thomas.jones1\Desktop\spelling-bst\tests\obj\Debug\net7.0\tests.genrunt
 C:\Users\thomas.jones1\Desktop\spelling-bst\tests\obj\Debug\net7.0\ref\tests.dll
 C:\Users\thomas.jones1\Desktop\spelling-bst\tests\bin\Debug\net7.0\sortedset.dll
 C:\Users\thomas.jones1\Desktop\spelling-bst\tests\bin\Debug\net7.0\sortedset.pdb
+C:\Users\cloud\Desktop\spelling-bst\tests\bin\Debug\net7.0\sortedset.dll
+C:\Users\cloud\Desktop\spelling-bst\tests\bin\Debug\net7.0\sortedset.pdb
