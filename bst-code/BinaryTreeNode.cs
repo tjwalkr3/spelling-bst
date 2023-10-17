@@ -22,36 +22,6 @@ public class BinaryTreeNode<T> where T: IComparable<T> {
         return temp;
     }
 
-    public void TraverseInOrder(IVisitor<T> visitor) {
-        if (left is not null) {
-            left.TraverseInOrder(visitor);
-        }
-        visitor.Visit(value);
-        if (right is not null) {
-            right.TraverseInOrder(visitor);
-        }
-    }
-
-    public void TraversePostOrder(IVisitor<T> visitor) {
-        if (left is not null) {
-            left.TraversePostOrder(visitor);
-        }
-        if (right is not null) {
-            right.TraversePostOrder(visitor);
-        }
-        visitor.Visit(value);
-    }
-
-    public void TraversePreOrder(IVisitor<T> visitor) {
-        visitor.Visit(value);
-        if (left is not null) {
-            left.TraversePreOrder(visitor);
-        }
-        if (right is not null) {
-            right.TraversePreOrder(visitor);
-        }
-    }
-
     public int Size() {
         Queue<BinaryTreeNode<T>> countQueue = new Queue<BinaryTreeNode<T>>();
         countQueue.Enqueue(this);

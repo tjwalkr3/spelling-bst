@@ -391,19 +391,6 @@
         "runtime": {
           "bin/placeholder/bst-code.dll": {}
         }
-      },
-      "sortedset/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v7.0",
-        "dependencies": {
-          "bst-code": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/sortedset.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/sortedset.dll": {}
-        }
       }
     }
   },
@@ -1004,11 +991,6 @@
       "type": "project",
       "path": "../bst-code/bst-code.csproj",
       "msbuildProject": "../bst-code/bst-code.csproj"
-    },
-    "sortedset/1.0.0": {
-      "type": "project",
-      "path": "../sortedset/sortedset.csproj",
-      "msbuildProject": "../sortedset/sortedset.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -1018,8 +1000,7 @@
       "NUnit.Analyzers >= 3.6.1",
       "NUnit3TestAdapter >= 4.4.2",
       "bst-code >= 1.0.0",
-      "coverlet.collector >= 3.2.0",
-      "sortedset >= 1.0.0"
+      "coverlet.collector >= 3.2.0"
     ]
   },
   "packageFolders": {
@@ -1049,9 +1030,6 @@
           "projectReferences": {
             "C:\\Users\\cloud\\Desktop\\spelling-bst\\bst-code\\bst-code.csproj": {
               "projectPath": "C:\\Users\\cloud\\Desktop\\spelling-bst\\bst-code\\bst-code.csproj"
-            },
-            "C:\\Users\\cloud\\Desktop\\spelling-bst\\sortedset\\sortedset.csproj": {
-              "projectPath": "C:\\Users\\cloud\\Desktop\\spelling-bst\\sortedset\\sortedset.csproj"
             }
           }
         }

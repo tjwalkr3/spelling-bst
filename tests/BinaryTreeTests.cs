@@ -1,76 +1,75 @@
 namespace tests;
 using bst_code;
+using NUnit.Framework.Constraints;
 
 public class BinaryTreeTests {
-    //add tests
+
+    // This test verifies that Add(), InOrder(), and the balancing functionality are all functional
     [Test]
     public void TestAdding()
     {
-        BinaryTree<int> tree = new BinaryTree<int>();
-        tree.Add(4);
-        tree.Add(2);
-        tree.Add(6);
-        tree.Add(1);
-        tree.Add(3);
-        tree.Add(5);
-        tree.Add(7);
+        Tree<int> tree = new Tree<int>();
+        Assert.That(tree.Add(1), Is.EqualTo(true));
+        Assert.That(tree.Add(2), Is.EqualTo(true));
+        Assert.That(tree.Add(3), Is.EqualTo(true));
+        Assert.That(tree.Add(4), Is.EqualTo(true));
+        Assert.That(tree.Add(5), Is.EqualTo(true));
+        Assert.That(tree.Add(5), Is.EqualTo(false)); // Test to reject repeats
+        Assert.That(tree.Add(2), Is.EqualTo(false)); // Test to reject repeats
+        Assert.That(tree.Add(6), Is.EqualTo(true));
+        Assert.That(tree.Add(7), Is.EqualTo(true));
 
-        List<int> inOrderAccumulated = tree.TraverseInOrder();
+        // Get the items from the iterator, store them in a list, and check them against the actual preorder
+        List<int> inOrderAccumulated = new List<int>();
+        foreach (int item in tree.InOrder()) inOrderAccumulated.Add(item);
         //Console.WriteLine($"Adding Test: {string.Join(',', inOrderAccumulated.ToArray())}");
         Assert.That(inOrderAccumulated, Is.EqualTo(new List<int>(){1, 2, 3, 4, 5, 6, 7}));
     }
 
+
+    // This test verifies that the Remove() function will throw errors if a key is not found
     [Test]
-    public void TestRemoving()
+    public void TestRemove()
     {
-        BinaryTree<int> tree = new BinaryTree<int>();
-        tree.Add(4);
-        tree.Add(2);
-        tree.Add(6);
-        tree.Add(1);
-        tree.Add(3);
-        tree.Add(5);
-        tree.Add(7);
+        Tree<int> tree = new();
 
-        tree.Remove(7); // no children
-        tree.Remove(6); // one child
-        tree.Remove(2); // two children
-
-        List<int> inOrderAccumulated = tree.TraverseInOrder();
-        //Console.WriteLine($"Removing Test: {string.Join(',', inOrderAccumulated.ToArray())}");
-        Assert.That(inOrderAccumulated, Is.EqualTo(new List<int>(){1, 3, 4, 5}));
-    }
-
-    [Test]
-    public void TestBalancing()
-    {
-        BinaryTree<int> tree = new BinaryTree<int>();
         tree.Add(1);
         tree.Add(2);
         tree.Add(3);
         tree.Add(4);
-        tree.Add(5);
-        tree.Add(7);
-        tree.Add(6);
 
-        List<int> inOrderAccumulated = tree.TraverseInOrder();
-        //Console.WriteLine($"Balancing Test: {string.Join(',', inOrderAccumulated.ToArray())}");
-        Assert.That(inOrderAccumulated, Is.EqualTo(new List<int>(){1, 2, 3, 4, 5, 6, 7}));
+        Assert.That(tree.Remove(3), Is.EqualTo(3));
+        Assert.Throws<KeyNotFoundException>(() => {tree.Remove(3);});
+        Assert.Throws<KeyNotFoundException>(() => {tree.Remove(5);});
     }
 
+
+    // This test verifies that the Find() function will throw errors if a key is not found
     [Test]
     public void TestFind()
     {
-        BinaryTree<int> tree = new BinaryTree<int>();
+        Tree<int> tree = new();
+
         tree.Add(1);
         tree.Add(2);
         tree.Add(3);
         tree.Add(4);
 
-        Assert.That(tree.Find(1), Is.EqualTo(true));
-        Assert.That(tree.Find(2), Is.EqualTo(true));
-        Assert.That(tree.Find(3), Is.EqualTo(true));
-        Assert.That(tree.Find(4), Is.EqualTo(true));
-        Assert.That(tree.Find(5), Is.EqualTo(false));
+        Assert.That(tree.Find(3), Is.EqualTo(3));
+        Assert.Throws<KeyNotFoundException>(() => {tree.Find(5);});
+    }
+
+
+    [Test]
+    public void TestSize()
+    {
+        Tree<int> tree = new();
+
+        tree.Add(1);
+        tree.Add(2);
+        tree.Add(3);
+        tree.Add(4);
+
+        Assert.That(tree.Size(), Is.EqualTo(4));
     }
 }

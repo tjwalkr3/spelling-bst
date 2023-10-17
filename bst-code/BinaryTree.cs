@@ -1,18 +1,17 @@
 ﻿namespace bst_code;
 
-public class BinaryTree<T> where T: IComparable<T> {
+public class Tree<T> : ISortedSet<T>, ITraversable<T> where T : IComparable<T> {
     BinaryTreeNode<T>? root = null;
 
-    public bool Find(T data) {
+    public T Find(T data) {
         if (FindRecursive(root, data)) {
-            return true;
+            return data;
         } else {
-            return false;
+            throw new KeyNotFoundException("Item could not be found in this SortedSet");
         }
     }
 
-    private bool FindRecursive(BinaryTreeNode<T>? currentNode, T key)
-    {
+    private bool FindRecursive(BinaryTreeNode<T>? currentNode, T key) {
         // Key not found, return false.
         if (currentNode == null) {
             return false;
@@ -34,17 +33,24 @@ public class BinaryTree<T> where T: IComparable<T> {
         }
     }
 
-    public void Add(T data) {
-        BinaryTreeNode<T> newItem = new BinaryTreeNode<T>(data);
+    public bool Add(T data) {
         if (root == null) {
-            root = newItem;
+            root = new BinaryTreeNode<T>(data);
+            return true;
         } else {
-            root = AddRecursive(root, newItem);
+            int originalSize = root.Size();
+
+            root = AddRecursive(root, new BinaryTreeNode<T>(data));
+
+            if (root!.Size() > originalSize) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
-    private BinaryTreeNode<T> AddRecursive(BinaryTreeNode<T>? currentNode, BinaryTreeNode<T> newNode)
-    {
+    private BinaryTreeNode<T>? AddRecursive(BinaryTreeNode<T>? currentNode, BinaryTreeNode<T> newNode) {
         // If the current node is null, set currentNode to newNode.
         if (currentNode == null) {
             currentNode = newNode;
@@ -66,26 +72,33 @@ public class BinaryTree<T> where T: IComparable<T> {
         return currentNode;
     }
 
-    public void Remove(T key) {
-        root = RemoveRecursive(root, key);
+    public T Remove(T key) {
+        bool failed = false;
+        root = RemoveRecursive(root, key, ref failed);
+
+        if (failed) {
+            throw new KeyNotFoundException("Item could not be found in this SortedSet");
+        } else {
+            return key;
+        }
     }
 
-    private BinaryTreeNode<T>? RemoveRecursive(BinaryTreeNode<T>? currentNode, T key)
-    {
+    private BinaryTreeNode<T>? RemoveRecursive(BinaryTreeNode<T>? currentNode, T key, ref bool failed) {
         // Key not found, no action needed.
         if (currentNode == null) {
+            failed = true;
             return currentNode;
         }
 
         // If the key is less than the current node's key, go left. 
         else if (key.CompareTo(currentNode.GetValue()) < 0) {
-            currentNode.left = RemoveRecursive(currentNode.left, key);
+            currentNode.left = RemoveRecursive(currentNode.left, key, ref failed);
             currentNode = balance(currentNode);
         }
 
         // If the key is less than the current node's key, go right. 
         else if (key.CompareTo(currentNode.GetValue()) > 0) {
-            currentNode.right = RemoveRecursive(currentNode.right, key);
+            currentNode.right = RemoveRecursive(currentNode.right, key, ref failed);
             currentNode = balance(currentNode);
         }
         
@@ -116,7 +129,7 @@ public class BinaryTree<T> where T: IComparable<T> {
                     temp = temp.left;
                 }
                 currentNode.SetValue(temp.GetValue());
-                currentNode.right = RemoveRecursive(currentNode.right, temp.GetValue());
+                currentNode.right = RemoveRecursive(currentNode.right, temp.GetValue(), ref failed);
             }
 
             if (currentNode != null) {
@@ -148,8 +161,7 @@ public class BinaryTree<T> where T: IComparable<T> {
     }
 
     // Get the difference in height between the left and right branches
-    int leftRightDifference(BinaryTreeNode<T>? node) 
-    {
+    int leftRightDifference(BinaryTreeNode<T>? node) {
         int leftHeight = 0;
         int rightHeight = 0;
 
@@ -160,58 +172,84 @@ public class BinaryTree<T> where T: IComparable<T> {
         return leftHeight - rightHeight; 
     }
 
-    private BinaryTreeNode<T> RotateRightRight(BinaryTreeNode<T> parent)
-    {
+    private BinaryTreeNode<T> RotateRightRight(BinaryTreeNode<T> parent) {
         BinaryTreeNode<T> newParent = parent.right!;
         parent.right = newParent.left;
         newParent.left = parent;
         return newParent;
     }
 
-    private BinaryTreeNode<T> RotateRightLeft(BinaryTreeNode<T> parent)
-    {
+    private BinaryTreeNode<T> RotateRightLeft(BinaryTreeNode<T> parent) {
         BinaryTreeNode<T> newParent = parent.right!;
         parent.right = RotateLeftLeft(newParent);
         return RotateRightRight(parent);
     }
 
-    private BinaryTreeNode<T> RotateLeftLeft(BinaryTreeNode<T> parent)
-    {
+    private BinaryTreeNode<T> RotateLeftLeft(BinaryTreeNode<T> parent) {
         BinaryTreeNode<T> newParent = parent.left!;
         parent.left = newParent.right;
         newParent.right = parent;
         return newParent;
     }
 
-    private BinaryTreeNode<T> RotateLeftRight(BinaryTreeNode<T> parent)
-    {
+    private BinaryTreeNode<T> RotateLeftRight(BinaryTreeNode<T> parent) {
         BinaryTreeNode<T> pivot = parent.left!;
         parent.left = RotateRightRight(pivot);
         return RotateLeftLeft(parent);
     }
 
-    public List<T> TraverseInOrder() {
-        List<T> accumulated = new List<T>();
-        Accumulator<T> visitor = new Accumulator<T>(accumulated);
-        if (root != null) root.TraverseInOrder(visitor);
-
-        return accumulated;
+    public IEnumerable<T> InOrder() {
+        foreach (T value in TraverseInOrderRecursive(root)) {
+            yield return value;
+        }
     }
 
-    public List<T> TraversePostOrder() {
-        List<T> accumulated = new List<T>();
-        Accumulator<T> visitor = new Accumulator<T>(accumulated);
-        if (root != null) root.TraversePostOrder(visitor);
-
-        return accumulated;
+    private IEnumerable<T> TraverseInOrderRecursive(BinaryTreeNode<T>? currentNode) {
+        if (currentNode is not null) {
+            foreach (T value in TraverseInOrderRecursive(currentNode.left)) {
+                yield return value;
+            }
+            yield return currentNode.GetValue();
+            foreach (T value in TraverseInOrderRecursive(currentNode.right)) {
+                yield return value;
+            }
+        }
     }
 
-    public List<T> TraversePreOrder() {
-        List<T> accumulated = new List<T>();
-        Accumulator<T> visitor = new Accumulator<T>(accumulated);
-        if (root != null) root.TraversePreOrder(visitor);
+    public IEnumerable<T> PostOrder() {
+        foreach (T value in TraversePostOrderRecursive(root)) {
+            yield return value;
+        }
+    }
 
-        return accumulated;
+    private IEnumerable<T> TraversePostOrderRecursive(BinaryTreeNode<T>? currentNode) {
+        if (currentNode is not null) {
+            foreach (T value in TraversePostOrderRecursive(currentNode.left)) {
+                yield return value;
+            }
+            foreach (T value in TraversePostOrderRecursive(currentNode.right)) {
+                yield return value;
+            }
+            yield return currentNode.GetValue();
+        }
+    }
+
+    public IEnumerable<T> PreOrder() {
+        foreach (T value in TraversePreOrderRecursive(root)) {
+            yield return value;
+        }
+    }
+
+    private IEnumerable<T> TraversePreOrderRecursive(BinaryTreeNode<T>? currentNode) {
+        if (currentNode is not null) {
+            yield return currentNode.GetValue();
+            foreach (T value in TraversePreOrderRecursive(currentNode.left)) {
+                yield return value;
+            }
+            foreach (T value in TraversePreOrderRecursive(currentNode.right)) {
+                yield return value;
+            }
+        }
     }
 
     public int Size() {
