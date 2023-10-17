@@ -15,7 +15,7 @@ public class BinaryTreeNodeTests
         new BinaryTreeNode<string>("9", null, null));
 
     [Test]
-    public void TestSize2()
+    public void TestSize()
     {
         Assert.That(tree.Size(), Is.EqualTo(9));
         Assert.That(tree.left?.Size(), Is.EqualTo(7));
@@ -24,7 +24,7 @@ public class BinaryTreeNodeTests
     }
 
     [Test]
-    public void TestHeight2()
+    public void TestHeight()
     {
         Assert.That(tree.Height(), Is.EqualTo(4));
         Assert.That(tree.left?.Height(), Is.EqualTo(3));

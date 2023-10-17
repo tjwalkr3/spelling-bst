@@ -13,7 +13,8 @@
           "NUnit.Analyzers": "3.6.1",
           "NUnit3TestAdapter": "4.4.2",
           "bst-code": "1.0.0",
-          "coverlet.collector": "3.2.0"
+          "coverlet.collector": "3.2.0",
+          "spelling": "1.0.0"
         },
         "runtime": {
           "tests.dll": {}
@@ -321,6 +322,14 @@
         "runtime": {
           "bst-code.dll": {}
         }
+      },
+      "spelling/1.0.0": {
+        "dependencies": {
+          "bst-code": "1.0.0"
+        },
+        "runtime": {
+          "spelling.dll": {}
+        }
       }
     }
   },
@@ -422,6 +431,11 @@
       "hashPath": "system.reflection.metadata.1.6.0.nupkg.sha512"
     },
     "bst-code/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "spelling/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -1,6 +1,5 @@
 namespace tests;
 using bst_code;
-using NUnit.Framework.Constraints;
 
 public class BinaryTreeTests {
 
@@ -22,12 +21,11 @@ public class BinaryTreeTests {
         // Get the items from the iterator, store them in a list, and check them against the actual preorder
         List<int> inOrderAccumulated = new List<int>();
         foreach (int item in tree.InOrder()) inOrderAccumulated.Add(item);
-        //Console.WriteLine($"Adding Test: {string.Join(',', inOrderAccumulated.ToArray())}");
         Assert.That(inOrderAccumulated, Is.EqualTo(new List<int>(){1, 2, 3, 4, 5, 6, 7}));
     }
 
 
-    // This test verifies that the Remove() function will throw errors if a key is not found
+    // This test verifies that the Remove() function will throw exceptions if a key is not found
     [Test]
     public void TestRemove()
     {
@@ -44,7 +42,7 @@ public class BinaryTreeTests {
     }
 
 
-    // This test verifies that the Find() function will throw errors if a key is not found
+    // This test verifies that the Find() function will throw exceptions if a key is not found
     [Test]
     public void TestFind()
     {
