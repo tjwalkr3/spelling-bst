@@ -9,38 +9,45 @@ public static class Spelling {
         int seenBeforeCount = 0;
 
         for (int i = 0; i < inputWords.Count; i++) {
-            bool neverSeen = dict.Add(inputWords[i]);
+            bool neverSeen = false;
+
+            try {
+                dict.Find(inputWords[i]);
+            } catch (KeyNotFoundException) {
+                neverSeen = true;
+            }
 
             // Decide whether to increment the "words already seen" or the "new words seen"
             if (neverSeen) {
                 neverSeenCount++;
+                // Every third word you've never seen
+                if (neverSeenCount % 3 == 0) {
+                    string? successor = GetSuccessor(dict, inputWords[i]);
+                    if (successor == null) {
+                        output.Add($"{inputWords[i]}");
+                        dict.Add(inputWords[i]);
+                    } else {
+                        output.Add($"{successor}");
+                    }
+                } else {
+                    dict.Add(inputWords[i]);
+                    output.Add($"{inputWords[i]}");
+                }
             } else {
                 seenBeforeCount++;
-            }
+                if (seenBeforeCount % 3 == 0) {
+                    dict.Remove(inputWords[i]);
+                    string? successor = GetSuccessor(dict, inputWords[i]);
+                    if (successor != null) {
+                        output.Add($"{successor}");
+                    }
 
-            // Every third word you've never seen
-            if (neverSeenCount > 2) {
-                string? successor = GetSuccessor(dict, inputWords[i]);
-                if (successor == null) {
-                    output.Add($"{inputWords[i]} {neverSeenCount} {seenBeforeCount}");
+                // Usual case
                 } else {
-                    output.Add($"{successor} {neverSeenCount} {seenBeforeCount}");
+                    output.Add($"{inputWords[i]}");
                 }
-                neverSeenCount = 0;
-
-            // Every third word you've already seen
-            } else if (seenBeforeCount > 2) {
-                string? successor = GetSuccessor(dict, inputWords[i]);
-                dict.Remove(inputWords[i]);
-                if (successor != null) {
-                    output.Add($"{successor} {neverSeenCount} {seenBeforeCount}");
-                }
-                seenBeforeCount = 0;
-
-            // Usual case
-            } else {
-                output.Add($"{inputWords[i]} {neverSeenCount} {seenBeforeCount}");
             }
+
         }
         
         return output;
