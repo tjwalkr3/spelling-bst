@@ -10,13 +10,13 @@ public class SpellingTests {
 
         // I think the expected output in the canvas assignment has a small error.  The 8th to last word should be "sing" instead of "sunshine". 
 
-        // List<string> outputString = new(){"sunshine", "sunshine", "everywhere", "everywhere", "sunshine", "warms", 
-        // "the", "everywhere", "as", "birds", "sunshine", "their", "songs", "sunshine", "sunshine", "joy", "and", 
-        // "birds", "and", "the", "and", "everywhere"};
-
         List<string> outputString = new(){"sunshine", "sunshine", "everywhere", "everywhere", "sunshine", "warms", 
-        "the", "everywhere", "as", "birds", "sunshine", "their", "songs", "sunshine", "sing", "joy", "and", 
+        "the", "everywhere", "as", "birds", "sunshine", "their", "songs", "sunshine", "sunshine", "joy", "and", 
         "birds", "and", "the", "and", "everywhere"};
+
+        // List<string> outputString = new(){"sunshine", "sunshine", "everywhere", "everywhere", "sunshine", "warms", 
+        // "the", "everywhere", "as", "birds", "sunshine", "their", "songs", "sunshine", "sing", "joy", "and", 
+        // "birds", "and", "the", "and", "everywhere"};
 
         List<string> result = Spelling.Fix(inputString);
         Console.WriteLine($"Example Input: {string.Join(',', inputString.ToArray())}");

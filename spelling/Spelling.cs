@@ -22,9 +22,9 @@ public static class Spelling {
             if (neverSeenCount > 2) {
                 string? successor = GetSuccessor(dict, inputWords[i]);
                 if (successor == null) {
-                    output.Add(inputWords[i]);
+                    output.Add($"{inputWords[i]} {neverSeenCount} {seenBeforeCount}");
                 } else {
-                    output.Add(successor);
+                    output.Add($"{successor} {neverSeenCount} {seenBeforeCount}");
                 }
                 neverSeenCount = 0;
 
@@ -33,13 +33,13 @@ public static class Spelling {
                 string? successor = GetSuccessor(dict, inputWords[i]);
                 dict.Remove(inputWords[i]);
                 if (successor != null) {
-                    output.Add(successor);
+                    output.Add($"{successor} {neverSeenCount} {seenBeforeCount}");
                 }
                 seenBeforeCount = 0;
 
             // Usual case
             } else {
-                output.Add(inputWords[i]);
+                output.Add($"{inputWords[i]} {neverSeenCount} {seenBeforeCount}");
             }
         }
         
