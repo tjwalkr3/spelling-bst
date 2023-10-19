@@ -3,7 +3,7 @@ using bst_code;
 
 public class BinaryTreeTests {
 
-    // This test verifies that Add(), InOrder(), and the balancing functionality are all functional
+    // This test verifies that Add(), InOrder(), and the balancing functionality are all functional. 
     [Test]
     public void TestAdding()
     {
@@ -18,14 +18,14 @@ public class BinaryTreeTests {
         Assert.That(tree.Add(6), Is.EqualTo(true));
         Assert.That(tree.Add(7), Is.EqualTo(true));
 
-        // Get the items from the iterator, store them in a list, and check them against the actual preorder
+        // Get the items from the iterator, store them in a list, and check them against the actual preorder. 
         List<int> inOrderAccumulated = new List<int>();
         foreach (int item in tree.InOrder()) inOrderAccumulated.Add(item);
         Assert.That(inOrderAccumulated, Is.EqualTo(new List<int>(){1, 2, 3, 4, 5, 6, 7}));
     }
 
 
-    // This test verifies that the Remove() function will throw exceptions if a key is not found
+    // This test verifies that the Remove() function will throw exceptions if a key is not found. 
     [Test]
     public void TestRemove()
     {
@@ -42,7 +42,8 @@ public class BinaryTreeTests {
     }
 
 
-    // This test verifies that the Find() function will throw exceptions if a key is not found
+    // This test verifies that the Find() function will return a successor if a key is not found. 
+    // It also checks whether it will throw an error if there is no successor. 
     [Test]
     public void TestFind()
     {
@@ -54,6 +55,9 @@ public class BinaryTreeTests {
         tree.Add(4);
 
         Assert.That(tree.Find(3), Is.EqualTo(3));
+        Assert.That(tree.Remove(3), Is.EqualTo(3));
+        Assert.That(tree.Find(3), Is.EqualTo(4));
+
         Assert.Throws<KeyNotFoundException>(() => {tree.Find(5);});
     }
 

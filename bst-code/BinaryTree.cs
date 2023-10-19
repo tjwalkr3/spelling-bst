@@ -3,33 +3,29 @@
 public class Tree<T> : ISortedSet<T>, ITraversable<T> where T : IComparable<T> {
     BinaryTreeNode<T>? root = null;
 
-    public T Find(T data) {
-        if (FindRecursive(root, data)) {
-            return data;
+    public T Find(T key) {
+        IEnumerable<T> foundValue = FindRecursive(root, key);
+        if (foundValue.Any()) {
+            return foundValue.First();
         } else {
             throw new KeyNotFoundException("Item could not be found in this SortedSet");
         }
     }
 
-    private bool FindRecursive(BinaryTreeNode<T>? currentNode, T key) {
-        // Key not found, return false.
-        if (currentNode == null) {
-            return false;
-        }
-
-        // If the key is less than the current node's key, go left. 
-        else if (key.CompareTo(currentNode.GetValue()) < 0) {
-            return FindRecursive(currentNode.left, key);
-        }
-
-        // If the key is less than the current node's key, go right. 
-        else if (key.CompareTo(currentNode.GetValue()) > 0) {
-            return FindRecursive(currentNode.right, key);
-        }
-        
-        // You found the node
-        else {
-            return true;
+    // A modified version of my InOrder transversal function that only returns the
+    // successor if the key itself can't be found. 
+    private IEnumerable<T> FindRecursive(BinaryTreeNode<T>? currentNode, T key) {
+        if (currentNode is not null) {
+            foreach (T value in FindRecursive(currentNode.left, key)) {
+                yield return value;
+            }
+            if (currentNode.GetValue().CompareTo(key) >= 0) {
+                yield return currentNode.GetValue();
+                yield break;
+            }
+            foreach (T value in FindRecursive(currentNode.right, key)) {
+                yield return value;
+            }
         }
     }
 
@@ -102,9 +98,9 @@ public class Tree<T> : ISortedSet<T>, ITraversable<T> where T : IComparable<T> {
             currentNode = balance(currentNode);
         }
         
-        // You found the node to delete, now consider different cases
+        // You found the node to delete, now consider different cases. 
         else {
-            // A child is null
+            // A child is null. 
             if (currentNode.right == null || currentNode.left == null) {
                 BinaryTreeNode<T>? temp;
                 if (currentNode.left == null) {
@@ -113,16 +109,16 @@ public class Tree<T> : ISortedSet<T>, ITraversable<T> where T : IComparable<T> {
                     temp = currentNode.left;
                 }
                 
-                // Both Left and Right Children are null
+                // Both Left and Right Children are null. 
                 if (temp == null) {
                     currentNode = null;
 
-                // One of the children is null
+                // One of the children is null. 
                 } else {
                     currentNode = temp;
                 }
 
-            // Neither of the children are null
+            // Neither of the children are null. 
             } else {
                 BinaryTreeNode<T>? temp = currentNode.right; 
                 while (temp.left != null) {
@@ -140,6 +136,7 @@ public class Tree<T> : ISortedSet<T>, ITraversable<T> where T : IComparable<T> {
         return currentNode;
     }
 
+    // Balance by swapping at the current node using one of the four possible conditions. 
     private BinaryTreeNode<T> balance(BinaryTreeNode<T> current) {
         int diff = leftRightDifference(current);
         
@@ -160,7 +157,7 @@ public class Tree<T> : ISortedSet<T>, ITraversable<T> where T : IComparable<T> {
         return current;
     }
 
-    // Get the difference in height between the left and right branches
+    // Get the difference in height between the left and right branches. 
     int leftRightDifference(BinaryTreeNode<T>? node) {
         int leftHeight = 0;
         int rightHeight = 0;
@@ -172,6 +169,7 @@ public class Tree<T> : ISortedSet<T>, ITraversable<T> where T : IComparable<T> {
         return leftHeight - rightHeight; 
     }
 
+    // Right bigger than left, right's right child bigger than right's left child. 
     private BinaryTreeNode<T> RotateRightRight(BinaryTreeNode<T> parent) {
         BinaryTreeNode<T> newParent = parent.right!;
         parent.right = newParent.left;
@@ -179,12 +177,14 @@ public class Tree<T> : ISortedSet<T>, ITraversable<T> where T : IComparable<T> {
         return newParent;
     }
 
+    // Right bigger than left, right's left child bigger than right's right child. 
     private BinaryTreeNode<T> RotateRightLeft(BinaryTreeNode<T> parent) {
         BinaryTreeNode<T> newParent = parent.right!;
         parent.right = RotateLeftLeft(newParent);
         return RotateRightRight(parent);
     }
 
+    // Left bigger than right, left's left child bigger than left's right child. 
     private BinaryTreeNode<T> RotateLeftLeft(BinaryTreeNode<T> parent) {
         BinaryTreeNode<T> newParent = parent.left!;
         parent.left = newParent.right;
@@ -192,6 +192,7 @@ public class Tree<T> : ISortedSet<T>, ITraversable<T> where T : IComparable<T> {
         return newParent;
     }
 
+    // Left bigger than right, left's right child bigger than left's left child. 
     private BinaryTreeNode<T> RotateLeftRight(BinaryTreeNode<T> parent) {
         BinaryTreeNode<T> pivot = parent.left!;
         parent.left = RotateRightRight(pivot);

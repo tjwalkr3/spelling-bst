@@ -11,56 +11,54 @@ public static class Spelling {
         for (int i = 0; i < inputWords.Count; i++) {
             bool neverSeen = false;
 
+            // Have I seen this word before? 
             try {
-                dict.Find(inputWords[i]);
+                string found = dict.Find(inputWords[i]);
+                if (found != inputWords[i]) {
+                    throw new KeyNotFoundException("Item could not be found in this SortedSet");
+                }
             } catch (KeyNotFoundException) {
                 neverSeen = true;
             }
 
-            // Decide whether to increment the "words already seen" or the "new words seen"
+            // I've never seen this word before. 
             if (neverSeen) {
                 neverSeenCount++;
-                // Every third word you've never seen
+
+                // Three times
                 if (neverSeenCount % 3 == 0) {
-                    string? successor = GetSuccessor(dict, inputWords[i]);
-                    if (successor == null) {
-                        output.Add($"{inputWords[i]}");
+                    try {
+                        string successor = dict.Find(inputWords[i]);
+                        output.Add(successor);
+                    } catch (KeyNotFoundException) {
+                        output.Add(inputWords[i]);
                         dict.Add(inputWords[i]);
-                    } else {
-                        output.Add($"{successor}");
-                    }
-                } else {
-                    dict.Add(inputWords[i]);
-                    output.Add($"{inputWords[i]}");
-                }
-            } else {
-                seenBeforeCount++;
-                if (seenBeforeCount % 3 == 0) {
-                    dict.Remove(inputWords[i]);
-                    string? successor = GetSuccessor(dict, inputWords[i]);
-                    if (successor != null) {
-                        output.Add($"{successor}");
                     }
 
                 // Usual case
                 } else {
-                    output.Add($"{inputWords[i]}");
+                    dict.Add(inputWords[i]);
+                    output.Add(inputWords[i]);
                 }
-            }
 
-        }
-        
-        return output;
-    }
+            // I've seen this word before. 
+            } else {
+                seenBeforeCount++;
 
-    // Get the next succesor using the InOrder iterator
-    private static string? GetSuccessor(Tree<string> dict, string stringToFind) {
-        string? output = null;
+                // Three times
+                if (seenBeforeCount % 3 == 0) {
+                    dict.Remove(inputWords[i]);
+                    try {
+                        string successor = dict.Find(inputWords[i]);
+                        output.Add(successor);
+                    } catch (KeyNotFoundException) {
 
-        foreach (string current in dict.InOrder()) {
-            if (current.CompareTo(stringToFind) > 0) {
-                output = current;
-                break;
+                    }
+
+                // Usual case
+                } else {
+                    output.Add(inputWords[i]);
+                }
             }
         }
 

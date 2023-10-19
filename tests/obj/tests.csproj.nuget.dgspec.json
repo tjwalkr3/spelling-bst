@@ -1,32 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\thomas.jones1\\Desktop\\spelling-bst\\tests\\tests.csproj": {}
+    "C:\\Users\\cloud\\Desktop\\spelling-bst\\tests\\tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\thomas.jones1\\Desktop\\spelling-bst\\bst-code\\bst-code.csproj": {
+    "C:\\Users\\cloud\\Desktop\\spelling-bst\\bst-code\\bst-code.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\thomas.jones1\\Desktop\\spelling-bst\\bst-code\\bst-code.csproj",
+        "projectUniqueName": "C:\\Users\\cloud\\Desktop\\spelling-bst\\bst-code\\bst-code.csproj",
         "projectName": "bst-code",
-        "projectPath": "C:\\Users\\thomas.jones1\\Desktop\\spelling-bst\\bst-code\\bst-code.csproj",
-        "packagesPath": "C:\\Users\\thomas.jones1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\thomas.jones1\\Desktop\\spelling-bst\\bst-code\\obj\\",
+        "projectPath": "C:\\Users\\cloud\\Desktop\\spelling-bst\\bst-code\\bst-code.csproj",
+        "packagesPath": "C:\\Users\\cloud\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\cloud\\Desktop\\spelling-bst\\bst-code\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\thomas.jones1\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\cloud\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -64,37 +57,30 @@
         }
       }
     },
-    "C:\\Users\\thomas.jones1\\Desktop\\spelling-bst\\spelling\\spelling.csproj": {
+    "C:\\Users\\cloud\\Desktop\\spelling-bst\\spelling\\spelling.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\thomas.jones1\\Desktop\\spelling-bst\\spelling\\spelling.csproj",
+        "projectUniqueName": "C:\\Users\\cloud\\Desktop\\spelling-bst\\spelling\\spelling.csproj",
         "projectName": "spelling",
-        "projectPath": "C:\\Users\\thomas.jones1\\Desktop\\spelling-bst\\spelling\\spelling.csproj",
-        "packagesPath": "C:\\Users\\thomas.jones1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\thomas.jones1\\Desktop\\spelling-bst\\spelling\\obj\\",
+        "projectPath": "C:\\Users\\cloud\\Desktop\\spelling-bst\\spelling\\spelling.csproj",
+        "packagesPath": "C:\\Users\\cloud\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\cloud\\Desktop\\spelling-bst\\spelling\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\thomas.jones1\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\cloud\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\thomas.jones1\\Desktop\\spelling-bst\\bst-code\\bst-code.csproj": {
-                "projectPath": "C:\\Users\\thomas.jones1\\Desktop\\spelling-bst\\bst-code\\bst-code.csproj"
+              "C:\\Users\\cloud\\Desktop\\spelling-bst\\bst-code\\bst-code.csproj": {
+                "projectPath": "C:\\Users\\cloud\\Desktop\\spelling-bst\\bst-code\\bst-code.csproj"
               }
             }
           }
@@ -128,40 +114,33 @@
         }
       }
     },
-    "C:\\Users\\thomas.jones1\\Desktop\\spelling-bst\\tests\\tests.csproj": {
+    "C:\\Users\\cloud\\Desktop\\spelling-bst\\tests\\tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\thomas.jones1\\Desktop\\spelling-bst\\tests\\tests.csproj",
+        "projectUniqueName": "C:\\Users\\cloud\\Desktop\\spelling-bst\\tests\\tests.csproj",
         "projectName": "tests",
-        "projectPath": "C:\\Users\\thomas.jones1\\Desktop\\spelling-bst\\tests\\tests.csproj",
-        "packagesPath": "C:\\Users\\thomas.jones1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\thomas.jones1\\Desktop\\spelling-bst\\tests\\obj\\",
+        "projectPath": "C:\\Users\\cloud\\Desktop\\spelling-bst\\tests\\tests.csproj",
+        "packagesPath": "C:\\Users\\cloud\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\cloud\\Desktop\\spelling-bst\\tests\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\thomas.jones1\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\cloud\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\thomas.jones1\\Desktop\\spelling-bst\\bst-code\\bst-code.csproj": {
-                "projectPath": "C:\\Users\\thomas.jones1\\Desktop\\spelling-bst\\bst-code\\bst-code.csproj"
+              "C:\\Users\\cloud\\Desktop\\spelling-bst\\bst-code\\bst-code.csproj": {
+                "projectPath": "C:\\Users\\cloud\\Desktop\\spelling-bst\\bst-code\\bst-code.csproj"
               },
-              "C:\\Users\\thomas.jones1\\Desktop\\spelling-bst\\spelling\\spelling.csproj": {
-                "projectPath": "C:\\Users\\thomas.jones1\\Desktop\\spelling-bst\\spelling\\spelling.csproj"
+              "C:\\Users\\cloud\\Desktop\\spelling-bst\\spelling\\spelling.csproj": {
+                "projectPath": "C:\\Users\\cloud\\Desktop\\spelling-bst\\spelling\\spelling.csproj"
               }
             }
           }
